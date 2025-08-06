@@ -32,7 +32,7 @@ A streamlined AI-powered tool for pharmaceutical market research that identifies
 
 3. **Run the application**
    ```bash
-   streamlit run app.py
+   python -m streamlit run app.py
    ```
 
 ## 🎯 Advanced Scoring System

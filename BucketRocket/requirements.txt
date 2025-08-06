@@ -1,0 +1,15 @@
+streamlit
+mysql-connector-python
+python-dotenv
+pandas
+litellm>=1.17.0
+langchain
+langchain-community
+numpy
+scikit-learn
+plotly
+seaborn
+matplotlib
+json5
+tenacity
+pydantic>=2.0.0

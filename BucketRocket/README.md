@@ -26,13 +26,13 @@ A streamlined AI-powered tool for pharmaceutical market research that identifies
 
 2. **Configure environment**
    ```bash
-   cp .env.template .env
+   cp .env.example .env
    # Edit .env with your database and API credentials
    ```
 
 3. **Run the application**
    ```bash
-   streamlit run app.py
+   python -m streamlit run app.py
    ```
 
 ## 🎯 Advanced Scoring System

@@ -26,7 +26,7 @@ A streamlined AI-powered tool for pharmaceutical market research that identifies
 
 2. **Configure environment**
    ```bash
-   cp .env.template .env
+   cp .env.example .env
    # Edit .env with your database and API credentials
    ```
 

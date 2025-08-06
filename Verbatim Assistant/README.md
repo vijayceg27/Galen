@@ -1,6 +1,6 @@
 # Verbatim Assistant
 
-A streamlined AI-powered tool for pharmaceutical market research that identifies categories from survey responses and extracts scored quotes. Features advanced LiteLLM integration and comprehensive scoring mechanisms for professional research analysis.
+A streamlined AI-powered tool for pharmaceutical market research that identifies categories from survey responses and extracts most relevant quotes for updating in the deliverable. Features advanced LiteLLM integration and comprehensive scoring mechanisms for professional research analysis.
 
 ## 🚀 Key Features
 

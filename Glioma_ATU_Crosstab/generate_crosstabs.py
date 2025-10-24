@@ -329,8 +329,8 @@ class CrosstabGenerator:
         # Create result row with empty first column for alignment
         row = {'': '', 'Metric': 'Mean'}
         
-        # Overall mean and sample size (percentage/mean before n)
-        row['Overall (%)'] = round(valid_data[question_col].mean(), 1)
+        # Overall mean and sample size (mean before n)
+        row['Overall (Mean)'] = round(valid_data[question_col].mean(), 1)
         row['Overall (n)'] = len(valid_data)
         
         # Each segment
@@ -354,8 +354,8 @@ class CrosstabGenerator:
                     # Apply mapping to segment value
                     seg_value_label = seg_answer_mapping.get(seg_value, seg_value)
                     
-                    # Mean/percentage before n
-                    row[f'{seg_name}_{seg_value_label} (%)'] = round(mean_val, 1)
+                    # Mean before n
+                    row[f'{seg_name}_{seg_value_label} (Mean)'] = round(mean_val, 1)
                     row[f'{seg_name}_{seg_value_label} (n)'] = len(seg_subset)
         
         return pd.DataFrame([row])
@@ -388,11 +388,6 @@ class CrosstabGenerator:
         
         # Get answer label mapping for this question
         answer_mapping = self.get_answer_label_mapping(question_id)
-        
-        # Debug: Print mapping for S1
-        if question_id == 'S1':
-            print(f"\nDEBUG S1 Mapping: {answer_mapping}")
-            print(f"Response values in data: {responses[:5]}")
         
         # Create result dataframe
         result_rows = []
@@ -764,13 +759,23 @@ class CrosstabGenerator:
                     for col_idx, value in enumerate(row_data, start=1):
                         cell = ws.cell(row=current_row, column=col_idx)
                         
-                        # Check if this is a percentage column
-                        is_percentage = col_idx > 1 and '(%)' in df.columns[col_idx-1]
+                        # Check column type
+                        col_name = df.columns[col_idx-1] if col_idx > 0 else ''
+                        is_percentage_col = '(%)' in col_name
+                        is_mean_col = '(Mean)' in col_name
                         
-                        if isinstance(value, (int, float)) and is_percentage:
-                            # Convert to decimal (divide by 100) and format as percentage
-                            cell.value = value / 100
-                            cell.number_format = '0.0%'
+                        # Format based on column type
+                        if isinstance(value, (int, float)):
+                            if is_percentage_col:
+                                # Convert to decimal (divide by 100) and format as percentage
+                                cell.value = value / 100
+                                cell.number_format = '0.0%'
+                            elif is_mean_col:
+                                # Mean values as decimal
+                                cell.value = value
+                                cell.number_format = '0.0'
+                            else:
+                                cell.value = value
                         else:
                             cell.value = value
                         
